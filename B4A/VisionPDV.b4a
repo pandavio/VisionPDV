@@ -1,0 +1,104 @@
+﻿Build1=Default,com.pdv.vision
+File1=MainPage.bal
+File2=VisionSplash.png
+FileGroup1=Default Group
+FileGroup2=Default Group
+Group=Default Group
+Library1=b4xpages
+Library10=stringutils
+Library11=tts
+Library12=fusedlocationprovider
+Library2=camera2
+Library3=core
+Library4=gps
+Library5=javaobject
+Library6=json
+Library7=nhfusedlocation
+Library8=okhttputils2
+Library9=runtimepermissions
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetApplicationAttribute(android:usesCleartextTraffic, "true")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~AddPermission(android.permission.RECORD_AUDIO)~\n~AddPermission(android.permission.CAMERA)~\n~AddPermission(android.permission.ACCESS_FINE_LOCATION)~\n~AddPermission(android.permission.ACCESS_COARSE_LOCATION)~\n~AddPermission(android.permission.ACCESS_BACKGROUND_LOCATION)~\n~~\n~AddApplicationText(<meta-data~\n~    android:name="com.google.android.gms.version"~\n~    android:value="@integer/google_play_services_version" />)
+Module1=|relative|..\B4XMainPage
+Module2=CamEx2
+Module3=|relative|..\SpeechRecognition
+Module4=Starter
+NumberOfFiles=2
+NumberOfLibraries=12
+NumberOfModules=4
+Version=13.1
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Vision PDV
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: False
+#End Region
+
+'#BridgeLogger: True
+#AdditionalJar: com.android.support:support-v4
+#AdditionalJar: com.google.android.gms:play-services-location
+
+Sub Process_Globals
+	Public ActionBarHomeClicked As Boolean
+End Sub
+
+Sub Globals
+	
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Dim pm As B4XPagesManager
+	pm.Initialize(Activity)
+End Sub
+
+'Template version: B4A-1.01
+#Region Delegates
+
+Sub Activity_ActionBarHomeClick
+	ActionBarHomeClicked = True
+	B4XPages.Delegate.Activity_ActionBarHomeClick
+	ActionBarHomeClicked = False
+End Sub
+
+Sub Activity_KeyPress (KeyCode As Int) As Boolean
+'	Return B4XPages.Delegate.Activity_KeyPress(KeyCode)
+	If KeyCode = KeyCodes.KEYCODE_BACK Then
+		Dim page As Object = B4XPages.GetPage("MainPage") ' 你的主页面 ID
+		CallSubDelayed2(page, "HandleBackPressed", True)
+		Return True
+	End If
+	Return False
+End Sub
+
+Sub Activity_Resume
+	B4XPages.Delegate.Activity_Resume
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+	B4XPages.Delegate.Activity_Pause
+End Sub
+
+Sub Activity_PermissionResult (Permission As String, Result As Boolean)
+	B4XPages.Delegate.Activity_PermissionResult(Permission, Result)
+End Sub
+
+Sub Create_Menu (Menu As Object)
+	B4XPages.Delegate.Create_Menu(Menu)
+End Sub
+
+#if Java
+public boolean _onCreateOptionsMenu(android.view.Menu menu) {
+	 processBA.raiseEvent(null, "create_menu", menu);
+	 return true;
+	
+}
+#End If
+#End Region
+
+'Program code should go into B4XMainPage and other pages.
